@@ -36,3 +36,9 @@ router.get('/simple/get', function(req, res) {
         msg: `Hello World`
     })
 })
+router.get('/base/get', function(req, res) {
+    res.json({
+        msg: `Cassie大美女`,
+        requestMsg: req.query
+    })
+})
