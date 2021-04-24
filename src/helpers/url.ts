@@ -1,4 +1,4 @@
-import { isDate, isObject } from './util'
+import { isDate, isObject, isPlainObject } from './util'
 
 function encode(val: string): string {
     return encodeURIComponent(val) // 加密函数然后保留加密数据中的一些基本特殊字符
@@ -35,7 +35,7 @@ export function buildURL(url: string, params?: any) {
         values.forEach((val) => {//遍历最终的数据数据 
             if (isDate(val)) {//如果是日期就转化是字符串
                 val = val.toISOString()
-            } else if (isObject(val)) {//如果是对象就使用json的解析方式解析为字符串
+            } else if (isPlainObject(val)) {//如果是对象就使用json的解析方式解析为字符串
                 val = JSON.stringify(val)
             }
             parts.push(`${encode(key)}=${encode(val)}`)

@@ -10,3 +10,8 @@ export function isObject (val:any): val is Object {
     //验证是否是普通对象
     return val !== null && typeof val === 'object'
 }
+
+export function isPlainObject(val: any): val is Object {
+    //判断传入的数据是否为标 准对象格式
+    return toString.call(val) === '[object Object]'
+}
