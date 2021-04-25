@@ -5,3 +5,15 @@ export function transformRequest(data: any): any {
     }
     return data
 }
+
+export function transformResponse(data: any): any {
+    // 传入参数data
+    if (typeof data === 'string') {
+        try {
+            data = JSON.parse(data)
+        } catch (e) {
+            //
+        }
+    }
+    return data
+}

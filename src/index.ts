@@ -1,7 +1,7 @@
 import {AxiosRequestConfig, AxiosResponse, AxiosPromise} from './type/dataInterface'
 import { xhr } from './xhr'
 import { buildURL } from './helpers/url'
-import { transformRequest } from './helpers/data'
+import { transformRequest, transformResponse } from './helpers/data'
 import { processHeaders } from './helpers/headers'
 
 
@@ -26,9 +26,17 @@ function processConfig(config: AxiosRequestConfig): void {
     config.data = transformRequestData(config)
 }
 
+function transformResponseData(res: AxiosResponse): AxiosResponse {
+    //接收响应数据，并对响应数据data属性的值进行转化
+    res.data = transformResponse(res.data)
+    return res
+}
+
 function axios(config: AxiosRequestConfig):AxiosPromise {
     processConfig(config)
-    return xhr(config)
+    return xhr(config).then(res => {
+        return transformResponseData(res) // 把生成的promise对象进行转化，处理promise对象中的data数据
+    })
 }
 
 export {axios}
