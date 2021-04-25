@@ -8,6 +8,27 @@ axios({
         b: 2
     }
 })
+
+axios({
+    method: 'post',
+    url: '/base/post',
+    headers: {
+        'content-type': 'application/json;charset=utf-8' // 预设一个请求头部
+    }, 
+    data: {
+        a: 3,
+        b: 4
+    }
+})
+
+const paramsString = 'q=URLUtils.searchParams&topic=api'
+const searchParams = new URLSearchParams(paramsString)
+axios({
+    method: 'post',
+    url: '/base/post',
+    data: searchParams
+})
+
 const arr = new Int32Array([21, 31])
 axios({
     method: 'post',

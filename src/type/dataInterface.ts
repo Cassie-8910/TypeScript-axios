@@ -1,6 +1,7 @@
 interface AxiosRequestConfig{
     url: string
-    method?:Method
+    method?:Method,
+    headers?:any,
     data?:any
     params?:any
 }
