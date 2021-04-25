@@ -25,3 +25,25 @@ export function processHeaders(headers:any, data:any):any {
     }
     return headers
 }
+
+export function parseHeaders(headers: string): any {
+    // 传入一个headers字符串
+    let parsed = Object.create(null)
+    if(!headers) {
+        return parsed
+    }
+
+    headers.split('\r\n').forEach(line => {
+        // \r是回到行首 \n是换行 回车键一般是这两个命令对组合
+        let [key, val] = line.split(':') // 解构赋值
+        key = key.trim().toLowerCase()
+        if(!key) {
+            return
+        } 
+        if(val) {
+            val = val.trim()
+        }
+        parsed[key] = val
+    })
+    return parsed
+}
