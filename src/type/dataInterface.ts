@@ -4,7 +4,8 @@ interface AxiosRequestConfig {
     headers?: any,
     data?: any,
     params?: any
-    responseType ?: XMLHttpRequestResponseType
+    responseType?: XMLHttpRequestResponseType
+    timeout?: number
 }
 
 interface AxiosResponse {
@@ -17,13 +18,21 @@ interface AxiosResponse {
     request: any // 请求的XMLHttpRequest 对象实例 request
 }
 
-export interface AxiosPromise extends Promise<AxiosResponse> {
-
-}
-
 type Method = 'get' | 'GET' | 'delete' | 'DELETE' | 'head' | 'HEAD'
     | 'post' | 'POST'
     | 'put' | 'PUT'
     | 'patch' | 'PATCH'
 
-export { AxiosRequestConfig, AxiosResponse}
+export { AxiosRequestConfig, AxiosResponse }
+
+export interface AxiosPromise extends Promise<AxiosResponse> {
+
+}
+
+export interface AxiosError extends Error {
+    config: AxiosRequestConfig
+    code?: string
+    request?: any
+    response?: AxiosResponse
+    isAxiosError: boolean
+}
