@@ -39,4 +39,4 @@ function axios(config: AxiosRequestConfig):AxiosPromise {
     })
 }
 
-export {axios}
+export {axios as dispatchRequest}

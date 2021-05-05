@@ -1,5 +1,5 @@
 import { AxiosRequestConfig, AxiosPromise, Method }  from '../type/dataInterface'
-import dispatchRequest from './dispatchRequest'
+import { dispatchRequest } from './dispatchRequest'
 
 export default class Axios {
     _requestMethodWithoutData(method:Method, url: string, config?: AxiosRequestConfig) {
@@ -43,6 +43,6 @@ export default class Axios {
         return this._requestMethodWithData('put', url, data, config)
     }
       patch(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise {
-        return this._requestMethodWithData('pacth', url, data, config)
+        return this._requestMethodWithData('patch', url, data, config)
     }
 }
