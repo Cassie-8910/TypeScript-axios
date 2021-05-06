@@ -36,6 +36,7 @@ registerSimpleRouter()
 registerBaseRouter()
 registerErrorRouter()
 registerExtendRouter()
+registerInterceptorRouter()
 
 function registerSimpleRouter() {
     //注册简单项目的路由 
@@ -121,5 +122,11 @@ function registerExtendRouter() { //注册拓展模块路由
                 age: 18
             }
         })
+    })
+}
+
+function registerInterceptorRouter() {
+    router.get('/interceptor/get', function(req, res) {
+        res.end('hello Cassie') // 拦截器示例的请求，返回的是一个 “hello”
     })
 }

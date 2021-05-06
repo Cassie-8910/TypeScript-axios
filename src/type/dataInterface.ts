@@ -31,6 +31,10 @@ export interface AxiosPromise extends Promise<AxiosResponse> {
 }
 
 export interface Axios {
+    interceptors:{
+        request :AxiosInterceptorManager<AxiosRequestConfig>
+        response:AxiosInterceptorManager<AxiosResponse>
+    }
     //定义各种方法的参数和返回数据，不管传入的参数如何，最终返回的都是一个AxiosPromise对象
     request(config: AxiosRequestConfig): AxiosPromise
     get(url: string, config?: AxiosRequestConfig): AxiosPromise
@@ -53,4 +57,22 @@ export interface AxiosError extends Error {
     request?: any
     response?: AxiosResponse
     isAxiosError: boolean
+}
+
+export interface AxiosInterceptorManager<T> {
+    //接受 泛型参数
+    // 拦截器最终req 和 res 的接口定义
+    use(resolved: ResolvedFn<T>, rejected?: RejectedFn):number
+    //接触拦截器的代码操作
+    eject(id: number): void
+}
+
+export interface ResolvedFn<T=any> {
+    // 根据传入的泛型参数，定义函数的基本格式，函数返回值为联合类型
+    (val: T):T | Promise<T>
+}
+
+export interface RejectedFn {
+    // 根据传入的泛型参数，定义函数的基本格式，函数返回值为联合类型
+    (error: any):any
 }
